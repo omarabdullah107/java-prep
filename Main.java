@@ -6,7 +6,8 @@ class Main {
         // reverse(nums);
         // System.out.println(maximum(maxNum));
         // System.out.println(evenSum(nums));
-        System.out.println(oddNumCounter(nums));
+        // System.out.println(oddNumCounter(nums));
+        System.out.println(greaterThanTen(maxNum));
     }
 
     public static void reverse(int[] nums) {
@@ -44,4 +45,17 @@ class Main {
         }
         return counter;
     }
+
+    // Write a function that returns the number of elements in an array that are
+    // greater than 10.
+    public static int greaterThanTen(int[] nums) {
+        int numCounter = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 10) {
+                numCounter += 1;
+            }
+        }
+        return numCounter;
+    }
+
 }
