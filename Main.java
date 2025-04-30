@@ -7,9 +7,11 @@ class Main {
         // System.out.println(maximum(maxNum));
         // System.out.println(evenSum(nums));
         // System.out.println(oddNumCounter(nums));
-        System.out.println(greaterThanTen(maxNum));
+        // System.out.println(greaterThanTen(maxNum));
+        System.out.println(average(nums));
     }
 
+    // EASY MODE FOR WARMUP
     public static void reverse(int[] nums) {
         for (int i = nums.length - 1; i >= 0; i--) {
             System.out.print(nums[i] + " ");
@@ -57,5 +59,19 @@ class Main {
         }
         return numCounter;
     }
+
+    // "Find the average of all numbers in an array."
+    public static int average(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+
+        return sum / nums.length;
+    }
+
+    // MEDIUM MODE
+
+    // Problem: Find the Second Largest Number
 
 }
