@@ -1,14 +1,32 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+
 class Main {
     // Array manipulation recap and they are considered leetcode.
     public static void main(String[] args) {
         int[] nums = { 1, 2, 3, 4, 5, 6 };
+        int[] numsDESC = { 5, 4, 3, 2, 1 };
         int[] maxNum = { 4, 17, 2, 99, 23 };
+        int[] duplicatesTrue = { 1, 3, 2, 1 };
+        int[] duplicatesFalse = { 1, 3, 2, 4 };
         // reverse(nums);
         // System.out.println(maximum(maxNum));
         // System.out.println(evenSum(nums));
         // System.out.println(oddNumCounter(nums));
         // System.out.println(greaterThanTen(maxNum));
-        System.out.println(average(nums));
+        // System.out.println(average(nums));
+        // System.out.println(minimumNum(maxNum));
+        // System.out.println(secondLargestNum(maxNum));
+        // System.out.println(isSortedAscending(numsDESC));
+        // System.out.println(containsDuplicate(duplicatesTrue));
+        int[] resultOfTwoSum = twoSum(nums, 5);
+        // System.out.println(Arrays.toString(resultOfTwoSum));
+
+        int[] mapRes = twoSumHash(nums, 5);
+        for (int number : mapRes) {
+            System.out.println(number + " ");
+        }
     }
 
     // EASY MODE FOR WARMUP
@@ -70,8 +88,97 @@ class Main {
         return sum / nums.length;
     }
 
+    // Write a function that takes an array of integers and returns the smallest
+    // number in the array.
+    public static int minimumNum(int[] maxNum) {
+        int min = maxNum[0];
+        for (int i = 0; i < maxNum.length; i++) {
+            if (min > maxNum[i]) {
+                min = maxNum[i];
+            }
+        }
+        return min;
+    }
+
     // MEDIUM MODE
 
     // Problem: Find the Second Largest Number
+    public static int secondLargestNum(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        int secMax = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if (max < nums[i]) {
+                secMax = max;
+                max = nums[i];
+            } else if (nums[i] > secMax && nums[i] < max) {
+                secMax = nums[i];
+            }
+        }
+        return secMax;
+    }
 
+    // Write a Java method that checks if a given array is sorted in ascending
+    // order.
+
+    public static boolean isSortedAscending(int[] nums) {
+        boolean state = false;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] < nums[i + 1]) {
+                state = true;
+            }
+        }
+        return state;
+    }
+
+    public static boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (set.contains(nums[i])) {
+                return true;
+            }
+            set.add(nums[i]);
+        }
+        return false;
+    }
+
+    /*
+     * Question: "Two Sum"
+     * Given an array of integers nums and an integer target,
+     * return the indices of the two numbers such that they add up to target.
+     * 
+     * 
+     * Input: nums = [2, 7, 11, 15], target = 9
+     * Output: [0, 1]
+     * Explanation: Because nums[0] + nums[1] == 9
+     * 
+     */
+
+    // using nested loop
+    public static int[] twoSum(int[] nums, int target) {
+        int[] indArr = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    indArr[0] = i;
+                    indArr[1] = j;
+                    return indArr;
+                }
+            }
+        }
+        return indArr;
+    }
+
+    // using hashmap more faster and efficient
+    public static int[] twoSumHash(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int res = target - nums[i];
+            if (map.containsKey(res)) {
+                return new int[] { map.get(res), i };
+            }
+            map.put(nums[i], i);
+        }
+        return new int[0];
+    }
 }
