@@ -154,7 +154,7 @@ class Main {
      * 
      */
 
-    // using nested loop
+    // using nested loop (brute force)
     public static int[] twoSum(int[] nums, int target) {
         int[] indArr = new int[2];
         for (int i = 0; i < nums.length; i++) {
@@ -181,4 +181,18 @@ class Main {
         }
         return new int[0];
     }
+
+    /*
+     * Problem: Longest Substring Without Repeating Characters
+     * 
+     * Input: s = "abcabcbb"
+     * Output: 3
+     * Explanation: The answer is "abc", with the length of 3.
+     */
+
+    // public static String longSubString(String s) {
+    //     for(int i = 0; i < s.length(); i++) {
+    //         if(s.equals)
+    //     }
+    //  }
 }
