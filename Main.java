@@ -27,6 +27,8 @@ class Main {
         for (int number : mapRes) {
             System.out.println(number + " ");
         }
+
+        System.out.println(longSubStringHash("null"));
     }
 
     // EASY MODE FOR WARMUP
@@ -190,9 +192,49 @@ class Main {
      * Explanation: The answer is "abc", with the length of 3.
      */
 
-    // public static String longSubString(String s) {
-    //     for(int i = 0; i < s.length(); i++) {
-    //         if(s.equals)
-    //     }
-    //  }
+    // using nested loop not efficient way
+    public static int longSubString(String s) {
+        int maxLength = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            String temp = "";
+
+            for (int j = i; j < s.length(); j++) {
+                char currentChar = s.charAt(j);
+
+                if (temp.indexOf(currentChar) != -1) {
+                    break; // Repeating character found, break the inner loop
+                }
+
+                temp += currentChar;
+                maxLength = Math.max(maxLength, temp.length());
+            }
+        }
+
+        return maxLength;
+    }
+
+    // efficient approach using hashSet
+    public static int longSubStringHash(String s) {
+        HashSet<Character> set = new HashSet<>();
+        int left = 0, right = 0, maxLength = 0;
+
+        while (right < s.length()) {
+            char currentChar = s.charAt(right);
+
+            // If character is not in the set, add it and update max length
+            if (!set.contains(currentChar)) {
+                set.add(currentChar);
+                maxLength = Math.max(maxLength, right - left + 1);
+                right++;
+            } else {
+                // If character is duplicate, remove from left and shrink window
+                set.remove(s.charAt(left));
+                left++;
+            }
+        }
+
+        return maxLength;
+    }
+
 }
